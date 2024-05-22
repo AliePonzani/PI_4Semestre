@@ -31,6 +31,11 @@ public class DBService {
     Genero genero7 = new Genero("aventura");
     Genero genero8 = new Genero("autoajuda");
     generoRepository.saveAll(Arrays.asList(genero1, genero2, genero3, genero4, genero5, genero6, genero7, genero8));
+
+    Livros livro1 = new Livros("Piquenique na Estrada", genero2, 4, 59.99);
+    Livros livro2 = new Livros("Nárnia", genero7, 2, 89.90);
+    Livros livro3 = new Livros("Organize Sua mente", genero8, 3, 34.99);
+    livrosRepository.saveAll(Arrays.asList(livro1, livro2, livro3));
     }
     
 }
