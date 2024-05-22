@@ -32,10 +32,25 @@ public class LivroResource {
         return livroService.getAllLivros();
     }
 
+    @GetMapping("/all") //listar todos os itens livro/genero
+    public List<Livros> getAllItens() {
+        return livroService.getAllItens();
+    }
+
     @GetMapping("/{id}") //listar livro por id
     public ResponseEntity<Livros> getLivroById(@PathVariable Integer id) {
         Livros livros = livroService.getLivroById(id);
         return ResponseEntity.ok().body(livros);
+    }
+
+    @GetMapping("/genero/{generoId}") // listar por genero os livros
+    public ResponseEntity<List<Livros>> getLivrosByGeneroId(@PathVariable Integer generoId) {
+        List<Livros> livros = livroService.findLivrosByGeneroId(generoId);
+        if (!livros.isEmpty()) {
+            return ResponseEntity.ok().body(livros);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping // criar livro
@@ -79,7 +94,5 @@ public class LivroResource {
             return ResponseEntity.notFound().build();
         }
     }
-
-    
 
 }

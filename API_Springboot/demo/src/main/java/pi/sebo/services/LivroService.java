@@ -19,6 +19,10 @@ public class LivroService {
         return livrosRepository.findAll();
     }
 
+    public List<Livros> getAllItens() {
+        return livrosRepository.getAll_Itens();
+    }
+
     public Livros getLivroById(Integer id){
         Optional<Livros> livros = livrosRepository.findById(id);
         return livros.orElse(null);
@@ -38,6 +42,10 @@ public class LivroService {
 
     public void deleteLivro(Integer id) {
         livrosRepository.deleteById(id);
+    }
+
+    public List<Livros> findLivrosByGeneroId(Integer generoId) {
+        return livrosRepository.findLivrosByGeneroId(generoId);
     }
 
 }
