@@ -1,7 +1,7 @@
 import { Genero } from "./genero"
 
-export interface Produto{
-    id?: number,
+export interface Livro{
+    id_livro?: number,
     titulo: String,
     genero: Genero,
     qtd: number,

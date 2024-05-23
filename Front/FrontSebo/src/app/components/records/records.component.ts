@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { Produto } from '../../entities/produto';
+import { Livro } from '../../entities/livro';
 import { Genero } from '../../entities/genero';
-import { ProdutoService } from '../../services/produto.service';
+import { LivroService } from '../../services/livro.service';
 
 @Component({
   selector: 'app-records',
@@ -12,24 +12,28 @@ import { ProdutoService } from '../../services/produto.service';
   templateUrl: './records.component.html',
   styleUrl: './records.component.css'
 })
-export class RecordsComponent {
+export class RecordsComponent implements OnInit{
   @Output() searchEvent = new EventEmitter<string>();
-
 
   generos: Genero[] = [{nome:"terror"}] 
   genero: Genero = this.generos[0]
-  list: Produto[] = []
-  filteredItems: Produto[] = [];
+  livro: Livro[] = []
+  filtroLivros: Livro[] = [];
   sectionVisible = false
 
 
-  constructor(private service: ProdutoService, public dialog: MatDialog) {
-    this.filteredItems = this.list;
+  constructor(private service: LivroService, public dialog: MatDialog) {
+    this.filtroLivros = this.livro;
   }
 
+ ngOnInit(): void {
+     this.buscarLivros();
+ }
+
   buscarLivros(): void {
-    this.service.buscarLivros().subscribe((resposta: Produto[]) => {
-      this.list = resposta;
+    this.service.buscarLivros().subscribe((resposta: Livro[]) => {
+      this.livro = resposta;
+      console.log("retorno da api ", resposta);
     });
   }
 
@@ -37,7 +41,7 @@ export class RecordsComponent {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      
     });
   }
 
@@ -48,7 +52,7 @@ export class RecordsComponent {
   onSearch(event: Event) {
     const target = event.target as HTMLInputElement
     const value = target.value
-    this.filteredItems = this.list.filter(item =>
+    this.filtroLivros = this.livro.filter(item =>
       item.titulo.toLowerCase().includes(value.toLowerCase())
     );
   }

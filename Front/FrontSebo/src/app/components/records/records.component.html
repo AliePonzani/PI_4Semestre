@@ -8,11 +8,11 @@
       </span></mat-icon>
     Add Livro
   </button>
-  <div *ngFor="let item of filteredItems">
+  <div *ngFor="let livro of filtroLivros">
     <mat-card class="livro">
-      <mat-card-content>{{item.titulo}} </mat-card-content>
-      <mat-card-content>{{item.genero.nome}}</mat-card-content>
-      <mat-card-content>{{item.valor}}</mat-card-content>
+      <mat-card-content>{{livro.titulo}} </mat-card-content>
+      <mat-card-content>{{livro.genero.nome}}</mat-card-content>
+      <mat-card-content>{{livro.valor}}</mat-card-content>
       <div class="acoes">
         <button mat-mini-fab color="primary">
           <mat-icon>edit</mat-icon>
