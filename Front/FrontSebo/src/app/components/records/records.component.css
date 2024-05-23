@@ -1,0 +1,25 @@
+.buscar{
+    width: 80%;
+    border-radius: 20px;
+    height: 2vw;
+    padding: 4px 20px;
+}
+
+.conteudo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 5%;
+}
+
+.livro{
+    background-color: #f1f1f1;
+}
+
+.acoes{
+    display: flex;
+    justify-content: end;
+    gap: 1%;
+    padding: 8px 20px;
+}

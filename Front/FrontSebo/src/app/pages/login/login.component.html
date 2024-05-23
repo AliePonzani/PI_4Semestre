@@ -1,0 +1,19 @@
+<main>
+    <h1>Bem Vindo!</h1>
+    <form [formGroup]="loginForm">
+        <mat-form-field>
+            <mat-label>Usuário</mat-label>
+            <input matInput formControlName="usuario">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha">
+            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        <button mat-raised-button (click)="onSubmit()" color="primary" type="submit">Buscar</button>
+    </form>
+
+    <p>{{ valor }}</p>
+</main>

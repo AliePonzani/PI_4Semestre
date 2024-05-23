@@ -1,0 +1,28 @@
+<mat-toolbar>Logo</mat-toolbar>
+<main>
+
+    <div class="opcao">
+        <button mat-fab extended color="primary" (click)="visible(false)" >
+            <mat-icon><span class="material-symbols-outlined">
+                    point_of_sale
+                </span></mat-icon>
+            Nova Venda
+        </button>
+        <button mat-fab extended color="primary" (click)="visible(true)" >
+            <mat-icon><span class="material-symbols-outlined">
+                    pallet
+                </span></mat-icon>
+            Estoque
+        </button>
+    </div>
+
+    <section *ngIf="sectionVisible">
+        <app-records class="teste"></app-records>
+    </section>
+
+    <section *ngIf="!sectionVisible">
+        <app-sale class="teste"></app-sale>
+    </section>
+
+
+</main>
