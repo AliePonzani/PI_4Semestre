@@ -1,0 +1,25 @@
+header{
+    height: 2vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    padding: 0 120px;
+    gap: 2vw;
+    margin-top: 2%;
+}
+
+.opcao{
+    width: 100%;
+    display: flex;
+    gap: 2%;
+}
+
+.teste{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+}
