@@ -24,7 +24,7 @@ public class Livros implements Serializable{
     String titulo;
 
     @ManyToOne
-    @JoinColumn(name ="genero", referencedColumnName = "id_genero")
+    @JoinColumn(name ="genero")
     Genero genero;
 
     @Column(name = "qtd")
