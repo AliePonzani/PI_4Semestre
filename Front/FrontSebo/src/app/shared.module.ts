@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CommonModule } from '@angular/common';
     MatTooltipModule,
     MatIconModule,
     MatCardModule,
+    HttpClientModule,
     CommonModule
     // Exporte outros módulos que você precise compartilhar
   ]

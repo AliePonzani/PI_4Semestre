@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { Produto } from '../../entities/produto';
+import { Genero } from '../../entities/genero';
+import { ProdutoService } from '../../services/produto.service';
 
 @Component({
   selector: 'app-records',
@@ -12,13 +15,22 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 export class RecordsComponent {
   @Output() searchEvent = new EventEmitter<string>();
 
-  items: string[] = ['Aline', 'Ana', 'Beatriz', "Barbara"];
-  filteredItems: string[] = [];
+
+  generos: Genero[] = [{nome:"terror"}] 
+  genero: Genero = this.generos[0]
+  list: Produto[] = []
+  filteredItems: Produto[] = [];
   sectionVisible = false
 
 
-  constructor(public dialog: MatDialog) {
-    this.filteredItems = this.items;
+  constructor(private service: ProdutoService, public dialog: MatDialog) {
+    this.filteredItems = this.list;
+  }
+
+  buscarLivros(): void {
+    this.service.buscarLivros().subscribe((resposta: Produto[]) => {
+      this.list = resposta;
+    });
   }
 
   openDialog() {
@@ -36,8 +48,8 @@ export class RecordsComponent {
   onSearch(event: Event) {
     const target = event.target as HTMLInputElement
     const value = target.value
-    this.filteredItems = this.items.filter(item =>
-      item.toLowerCase().includes(value.toLowerCase())
+    this.filteredItems = this.list.filter(item =>
+      item.titulo.toLowerCase().includes(value.toLowerCase())
     );
   }
 }
@@ -49,3 +61,25 @@ export class RecordsComponent {
   imports: [MatDialogModule],
 })
 export class DialogContentExampleDialog {}
+
+
+
+
+// {
+//   titulo: "Livro 1",
+//   qtd: 10,
+//   genero: this.genero,
+//   valor: 20.00
+// },
+// {
+//   titulo: "Livro 2",
+//   qtd: 10,
+//   genero: this.genero,
+//   valor: 20.00
+// },
+// {
+//   titulo: "Livro 3",
+//   qtd: 10,
+//   genero: this.genero,
+//   valor: 20.00
+// }
