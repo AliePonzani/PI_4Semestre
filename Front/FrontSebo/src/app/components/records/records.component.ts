@@ -33,12 +33,13 @@ export class RecordsComponent implements OnInit{
   buscarLivros(): void {
     this.service.buscarLivros().subscribe((resposta: Livro[]) => {
       this.livro = resposta;
-      console.log("retorno da api ", resposta);
+      this.filtroLivros = this.livro
+      console.log("retorno da api ", this.filtroLivros);
     });
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    const dialogRef = this.dialog.open(ModalCadastro);
 
     dialogRef.afterClosed().subscribe(result => {
       
@@ -59,12 +60,12 @@ export class RecordsComponent implements OnInit{
 }
 
 @Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: './dialog-content-example-dialog.html',
+  selector: 'modalCadastro',
+  templateUrl: './modalCadastro.html',
   standalone: true,
   imports: [MatDialogModule],
 })
-export class DialogContentExampleDialog {}
+export class ModalCadastro {}
 
 
 
