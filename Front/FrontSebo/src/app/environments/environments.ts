@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:8080/livros'
+    baseUrlLivro: 'http://localhost:8080/livros',
+    baseUrlGenero: 'http://localhost:8080/generos'
 }

@@ -1,0 +1,15 @@
+.modal {
+    padding: 20px;
+}
+
+.mat-typography {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    gap: 1.5rem;
+}
+
+input {
+    width: 260px;
+    height: 40px;
+}

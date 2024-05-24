@@ -38,15 +38,5 @@ export class LoginComponent {
     } else {
       this.valor = "Usuário ou senha inválidos!!!";
     }
-
-   
-
-    // this.cont += 1;
-    // if (this.cont > 10) {
-    //   this.cont = 0;
-    // }
-    // this.valor = usuario;
-    // this.valor2 = "botão buscar foi pressionado " + this.cont + " vezes";
-
   }
 }

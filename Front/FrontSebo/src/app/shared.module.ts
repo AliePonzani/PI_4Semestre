@@ -6,7 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatCardModule,
     HttpClientModule,
+    MatSelectModule,
+    FormsModule,
     CommonModule
     // Exporte outros módulos que você precise compartilhar
   ]

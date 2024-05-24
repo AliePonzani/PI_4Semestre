@@ -1,6 +1,5 @@
 <input class="buscar" type="text" (input)="onSearch($event)" placeholder="Buscar Livro">
 
-
 <div class="conteudo">
   <button mat-fab extended color="primary" (click)="openDialog()">
     <mat-icon><span class="material-symbols-outlined">
@@ -14,7 +13,7 @@
       <mat-card-content>{{livro.genero.nome}}</mat-card-content>
       <mat-card-content>{{livro.valor}}</mat-card-content>
       <div class="acoes">
-        <button mat-mini-fab color="primary">
+        <button mat-mini-fab color="accent" (click)="openDialog(livro)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-mini-fab color="warn">
