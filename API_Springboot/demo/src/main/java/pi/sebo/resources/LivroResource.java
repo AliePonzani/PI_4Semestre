@@ -80,12 +80,12 @@ public class LivroResource {
         }
     }
 
-    @PatchMapping("/{id}/venda") //logica da venda
-    public ResponseEntity<Void> decreaseQuantity(@PathVariable Integer id) {
+    @PatchMapping("/{id}/{qtd}") //logica da venda
+    public ResponseEntity<Void> decreaseQuantity(@PathVariable Integer id , @PathVariable Integer qtd) {
         Livros livro = livroService.getLivroById(id);
         if (livro != null) {
-            if (livro.getQtd() > 0) {
-                int novaQtd = livro.getQtd() - 1;
+            if (livro.getQtd() >= qtd) {
+                int novaQtd = livro.getQtd() - qtd;
                 livro.setQtd(novaQtd);
                 livroService.saveLivro(livro);
                 return ResponseEntity.ok().build();

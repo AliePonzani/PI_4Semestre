@@ -19,7 +19,6 @@ export class RecordsComponent implements OnInit {
   generos: Genero[] = [{ nome: "terror" }]
   genero: Genero = this.generos[0]
   livro: Livro[] = []
-  id_livro: Number = -1; 
   livroSelecionado: Livro[] = [];
   filtroLivros: Livro[] = [];
   sectionVisible = false
@@ -69,6 +68,19 @@ export class RecordsComponent implements OnInit {
     this.livroSelecionado[0] = livro;
     console.log(this.livroSelecionado);
     this.openDialog();
+  }
+
+  deletar(id:any):void{
+    this.service.deletar(id).subscribe((resposta) =>{
+      if(resposta == null){
+        this.service.message("Livro removido com Sucesso");
+        this.livro = this.livro.filter(livro => livro.id_livro != id);
+        this.buscarLivros();
+      }else{
+        this.service.message("Livro não removido");
+      }
+
+    })
   }
 
 
