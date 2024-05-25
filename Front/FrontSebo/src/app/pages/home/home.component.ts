@@ -15,9 +15,9 @@ export class HomeComponent {
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  items: string[] = ['Aline', 'Ana', 'Beatriz', "Barbara"];
+  items: string[] = [];
   filteredItems: string[] = [];
-  sectionVisible = false
+  sectionVisible = true
 
   constructor() {
     this.filteredItems = this.items;
