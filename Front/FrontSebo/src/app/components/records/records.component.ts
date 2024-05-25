@@ -61,7 +61,11 @@ export class RecordsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.buscarLivros()
-      this._toastService.success(result);
+      if (result === "OK") {
+        this._toastService.success("Operação realizada com sucesso!!!");
+      } else if(result === "ERROR"){
+        this._toastService.error("Erro ao realizar operação!!!");
+      }       
     });
   }
 
