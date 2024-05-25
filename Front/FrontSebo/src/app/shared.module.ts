@@ -23,6 +23,7 @@ import { AngularToastifyModule } from 'angular-toastify';
     MatToolbarModule,
     MatTooltipModule,
     MatIconModule,
+    MatDialogModule,
     MatCardModule,
     HttpClientModule,
     MatSelectModule,

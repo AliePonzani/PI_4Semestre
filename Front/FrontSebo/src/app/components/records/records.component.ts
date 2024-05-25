@@ -5,6 +5,7 @@ import { Livro } from '../../entities/livro';
 import { LivroService } from '../../services/livro.service';
 import { ModalComponent } from '../modal/modal.component';
 import { ToastService } from 'angular-toastify';
+import { ModalConfirmComponent } from '../modalConfirm/modalConfirm.component';
 
 @Component({
   selector: 'app-records',
@@ -61,7 +62,6 @@ export class RecordsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.buscarLivros()
       this._toastService.success(result);
-      console.log("Modal retornou ",result);
     });
   }
 
@@ -77,10 +77,31 @@ export class RecordsComponent implements OnInit {
     );
   }
 
-  dados(livro: Livro) {
-    this.livroSelecionado[0] = livro;
-    console.log(this.livroSelecionado);
-    this.openDialog();
+  confirmarDelete(id:any):void{
+    const dialogRef = this.dialog.open(ModalConfirmComponent,{
+      data:{message:'tem certeza que deseja excluir este livro?'}
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if (result) {
+        this.deletar(id);
+      }
+    });
+  }
+
+  deletar(id:any):void{
+    this.service.deletar(id).subscribe((resposta) =>{
+      if(resposta == null){
+        this.service.message("Livro removido com Sucesso");
+        this._toastService.success("Livro removido com Sucesso");
+        this.livro = this.livro.filter(livro => livro.id_livro != id);
+        this.buscarLivros();
+      }else{
+        this.service.message("Livro não removido");
+        this._toastService.error("Livro não removido");
+      }
+
+    })
   }
 
 

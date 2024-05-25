@@ -1,0 +1,10 @@
+<div class="modal_confirm">
+    <h2 mat-dialog-title>Confirmação</h2>
+    <div mat-dialog-content>
+        <p><strong>{{ data.message }}</strong></p>
+    </div>
+    <div mat-dialog-actions>
+        <button  mat-button (click)="onCancelClick()">Cancelar</button>
+        <button  mat-flat-button color="warn" (click)="onConfirmClick()">Confirmar</button>
+    </div>
+</div>

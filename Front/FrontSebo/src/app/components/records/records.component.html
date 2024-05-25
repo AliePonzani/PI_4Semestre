@@ -14,14 +14,17 @@
   </button>
   <div *ngFor="let livro of filtroLivros">
     <mat-card class="livro">
-      <mat-card-content>{{livro.titulo}} </mat-card-content>
-      <mat-card-content>{{livro.genero.nome}}</mat-card-content>
-      <mat-card-content>{{livro.valor}}</mat-card-content>
+      <div class="detalhes">
+        <mat-card-content>Nome Do Livro: <strong>{{livro.titulo}}</strong></mat-card-content>
+        <mat-card-content>Genero: <strong>{{livro.genero.nome}}</strong></mat-card-content>
+        <mat-card-content>Valor: <strong>R${{livro.valor}}</strong></mat-card-content>
+        <mat-card-content>Quantidade na Loja: <strong>{{livro.qtd}} unidades</strong></mat-card-content>
+      </div>
       <div class="acoes">
-        <button mat-mini-fab color="accent" (click)="openDialog(livro)">
+        <button mat-mini-fab color="primary" (click)="openDialog(livro)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-mini-fab color="warn">
+        <button mat-mini-fab color="warn" (click)="confirmarDelete(livro.id_livro)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
