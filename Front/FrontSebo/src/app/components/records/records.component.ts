@@ -5,13 +5,14 @@ import { Livro } from '../../entities/livro';
 import { Genero } from '../../entities/genero';
 import { LivroService } from '../../services/livro.service';
 import { ModalComponent } from '../modal/modal.component';
+import { ModalConfirmComponent } from '../modalConfirm/modalConfirm.component';
 
 @Component({
-  selector: 'app-records',
-  standalone: true,
-  imports: [SharedModule, MatDialogModule],
-  templateUrl: './records.component.html',
-  styleUrl: './records.component.css'
+    selector: 'app-records',
+    standalone: true,
+    templateUrl: './records.component.html',
+    styleUrl: './records.component.css',
+    imports: [SharedModule, MatDialogModule, ModalComponent]
 })
 export class RecordsComponent implements OnInit {
   @Output() searchEvent = new EventEmitter<string>();
@@ -68,6 +69,18 @@ export class RecordsComponent implements OnInit {
     this.livroSelecionado[0] = livro;
     console.log(this.livroSelecionado);
     this.openDialog();
+  }
+
+  confirmarDelete(id:any):void{
+    const dialogRef = this.dialog.open(ModalConfirmComponent,{
+      data:{message:'tem certeza que deseja excluir este livro?'}
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if (result) {
+        this.deletar(id);
+      }
+    });
   }
 
   deletar(id:any):void{

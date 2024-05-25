@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatTooltipModule,
     MatIconModule,
+    MatDialogModule,
     MatCardModule,
     HttpClientModule,
     MatSelectModule,
