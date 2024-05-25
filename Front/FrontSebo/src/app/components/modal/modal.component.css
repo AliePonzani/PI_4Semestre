@@ -13,3 +13,7 @@ input {
     width: 260px;
     height: 40px;
 }
+
+select{
+    height: 40px;
+}

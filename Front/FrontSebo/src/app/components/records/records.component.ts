@@ -2,29 +2,39 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Livro } from '../../entities/livro';
-import { Genero } from '../../entities/genero';
 import { LivroService } from '../../services/livro.service';
 import { ModalComponent } from '../modal/modal.component';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-records',
   standalone: true,
   imports: [SharedModule, MatDialogModule],
+  providers: [ToastService],
   templateUrl: './records.component.html',
   styleUrl: './records.component.css'
 })
 export class RecordsComponent implements OnInit {
   @Output() searchEvent = new EventEmitter<string>();
 
-  generos: Genero[] = [{ nome: "terror" }]
-  genero: Genero = this.generos[0]
+  transition = 'bounce';
+  position = 'top-right';
+  autoClose = 5000;
+  disableAutoClose = false;
+  hideProgress = false;
+  newestOnTop = false;
+  iconLibrary = 'material';
+  preventDuplicates = false;
+  closeOnClick = true;
+  pauseDelayHover = true;
+  pauseVisibilityChange = true;
+
   livro: Livro[] = []
-  id_livro: Number = -1; 
   livroSelecionado: Livro[] = [];
   filtroLivros: Livro[] = [];
   sectionVisible = false
 
-  constructor(private service: LivroService, public dialog: MatDialog) {
+  constructor(private service: LivroService, public dialog: MatDialog, private _toastService: ToastService) {
     this.filtroLivros = this.livro;
   }
 
@@ -50,6 +60,8 @@ export class RecordsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.buscarLivros()
+      this._toastService.success(result);
+      console.log("Modal retornou ",result);
     });
   }
 

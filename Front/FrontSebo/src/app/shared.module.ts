@@ -10,7 +10,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { AngularToastifyModule } from 'angular-toastify'; 
 
 @NgModule({
   // imports: [SaleComponent],
@@ -26,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatSelectModule,
     FormsModule,
+    MatDialogModule,
+    AngularToastifyModule,
     CommonModule
     // Exporte outros módulos que você precise compartilhar
   ]

@@ -1,19 +1,17 @@
 <div class="modal">
   <h1 mat-dialog-title>Novo Livro</h1>
   <mat-dialog-content class="mat-typography">
-    <input type="text" placeholder="Titulo do Livro" #titulo>
-    <select matNativeControl required [formControl]="selectFormControl">
-      <option label="--selecione um genero --"></option>
-      <option *ngFor="let genero of generos" type="number" value={{genero.id_genero}}>{{genero.nome}}</option>
+    <input type="text" placeholder="Titulo do Livro" [value]="livroSelecionado ? livroSelecionado.titulo : ''" #titulo>
+    <select matNativeControl required [(ngModel)]="selectedGeneroId" (ngModelChange)="onGeneroChange($event)">
+      <option value="" disabled>--selecione um genero--</option>
+      <option *ngFor="let genero of generos" [value]="genero.id_genero">{{genero.nome}}</option>
     </select>
-    @if (selectFormControl.hasError('required')) {
-    <mat-error>Selecionar o genero</mat-error>
-    }
-    <input type="number" placeholder="Valor" #valor>
-    <input type="number" placeholder="Quantidade" #qtd>
+    <mat-error *ngIf="selectFormControl.hasError('required')">Selecionar o genero</mat-error>
+    <input type="number" placeholder="Valor" [value]="livroSelecionado ? livroSelecionado.valor : ''" #valor>
+    <input type="number" placeholder="Quantidade" [value]="livroSelecionado ? livroSelecionado.qtd : ''" #qtd>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button (click)="salvarLivro(titulo.value, valor.valueAsNumber, qtd.valueAsNumber)" mat-dialog-close cdkFocusInitial>Salvar</button>
+    <button mat-button (click)="salvarLivro(titulo.value, valor.valueAsNumber, qtd.valueAsNumber)" mat-dialog-close cdkFocusInitial>{{tipo}}</button>
   </mat-dialog-actions>
 </div>

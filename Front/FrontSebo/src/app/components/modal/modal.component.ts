@@ -1,37 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SharedModule } from '../../shared.module';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Genero } from '../../entities/genero';
 import { Livro } from '../../entities/livro';
 import { GeneroService } from '../../services/genero.service';
 import { LivroService } from '../../services/livro.service';
-import { MatButtonModule } from '@angular/material/button';
-import { log } from 'node:console';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, SharedModule],
+  imports: [SharedModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
 export class ModalComponent implements OnInit {
-  titulo: String = ''
-  selectFormControl = new FormControl('', Validators.required);
-  valor: number = 0.00;
-  qtd: number = 0;
+  selectFormControl = new FormControl(0, Validators.required);
   generos: Genero[] = []
-  genero: number = 0;
-  livro: Livro[] = []
-  livroSelecionado: Livro[] = []
+  livro!: Livro;
+  livroSelecionado!: Livro;
+  tipo!: String;
+  selectedGeneroId: string | number = '';
 
-  constructor(private serviceGenero: GeneroService, private serviceLivro: LivroService) {
+
+  constructor(
+    private serviceGenero: GeneroService,
+    private serviceLivro: LivroService,
+    @Inject(MAT_DIALOG_DATA) public data: { livroSelecionado: Livro },
+    public dialogRef: MatDialogRef<ModalComponent>
+  ) {
+    this.livroSelecionado = data.livroSelecionado;
   }
 
   ngOnInit(): void {
-    console.log("No modal recebeu",this.livroSelecionado);
-    
+    if (this.livroSelecionado) {
+      this.selectedGeneroId = Number(this.livroSelecionado.genero.id_genero);
+      this.selectFormControl.setValue(this.selectedGeneroId);
+      this.tipo = "Alterar"
+    } else {
+      this.tipo = "Salvar"
+    }
     this.buscarGeneros();
   }
 
@@ -41,24 +49,40 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  
+  onGeneroChange(newGeneroId: number): void {
+    this.selectFormControl.setValue(newGeneroId);
+  }
 
   salvarLivro(titulo: string, valor: number, qtd: number): void {
-    this.livro = [{
+    this.livro = {
+      ...this.livroSelecionado,
       titulo: titulo,
       genero: {
         id_genero: Number(this.selectFormControl.value)
       },
       valor: valor,
       qtd: qtd
-    }]    
+    }
 
-    this.serviceLivro.salvarLivro(this.livro[0]).subscribe((resposta: Livro) => {
-      this.serviceLivro.message("Livro cadastrado!");
-    }, err => {
-      this.serviceLivro.message(err);
-    })
+    if (!this.livroSelecionado) {
+      this.serviceLivro.salvarLivro(this.livro).subscribe((resposta: Livro) => {
+        this.serviceLivro.message("Livro cadastrado!");
+        this.dialogRef.close("Livro cadastrado com sucesso!!");
+      }, err => {
+        this.serviceLivro.message(err);
+      })
+    } else {
+      this.serviceLivro.atualizarLivro(this.livro).subscribe({
+        next: (resposta) => {
+          this.serviceLivro.message("Livro atualizado!");
+          this.dialogRef.close("Livro atualizado com sucesso!");
+        },
+        error: (err) => {
+          this.serviceLivro.message("Erro ao atualizar livro!");
+          this.dialogRef.close("Erro ao atualizar livro!");
+        }
+      });
+      
+    }
   }
-
-
 }
