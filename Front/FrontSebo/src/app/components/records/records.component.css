@@ -13,13 +13,20 @@
     margin-bottom: 5%;
 }
 
+.detalhes{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .livro{
-    background-color: #f1f1f1;
+    background-color: rgb(241, 241, 241);
+    border-radius: 20px;
 }
 
 .acoes{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 1%;
     padding: 8px 20px;
 }
